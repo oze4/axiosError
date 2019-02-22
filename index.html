@@ -13,11 +13,13 @@
 
     <div id='root'>
         <div>
+            <h2>Make sure you are trying this over http, or else you will encounter CORS errors</h2>
             <button @click='getIpApi()'>Click Me</button>
         </div>
         <div>
-            <p v-model='ipApi'>
-            </p>
+            <pre>
+                {{ jsonResponse }}
+            </pre>
         </div>
     </div>
 
@@ -25,15 +27,20 @@
         new Vue({
             el: '#root',
             data: {
-                ipApi: '',
+                ipApiResponse: '',
+            },
+            computed: {
+                jsonResponse() {
+                    return JSON.stringify(this.ipApiResponse, undefined, 2);
+                },
             },
             methods: {
                 getIpApi() {
                     let url = 'http://ip-api.com/json';
                     axios.get(url).then((result) => {
-                        this.ipApi = result.data;
+                        this.ipApiResponse = result.data;
                     }).catch((error) => {
-                        alert(error);
+                        alert(error + 'Now click the button again and it will work');
                     });
                 },
             }
