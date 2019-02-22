@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Axios 307 Issues</title>
+</head>
+
+<body>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <div id='root'>
+        <div>
+            <button @click='getIpApi()'>Click Me</button>
+        </div>
+        <div>
+            <p v-model='ipApi'>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#root',
+            data: {
+                ipApi: '',
+            },
+            methods: {
+                getIpApi() {
+                    let url = 'http://ip-api.com/json';
+                    axios.get(url).then((result) => {
+                        this.ipApi = result.data;
+                    }).catch((error) => {
+                        alert(error);
+                    });
+                },
+            }
+        })
+    </script>
+</body>
+
+</html>
