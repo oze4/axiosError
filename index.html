@@ -18,7 +18,7 @@
             <button style='height:30px;' @click='getIpApi()'>Click Me</button>
         </div>
         <div>
-            <pre>
+            <pre v-if='this.ipApiResponse !== null'>
                 {{ jsonResponse }}
             </pre>
         </div>
